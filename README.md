@@ -1,63 +1,24 @@
+# README
 
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
+Things you may want to cover:
 
-##user_information
+* Ruby version
 
-| Column           | Type        |Option                         |
-|------------------|-------------|-------------------------------|
-| name             | references  | null: false, foreign_key: true|
-| text             | references  | null: false, foreign_key: true|
-| image            | references  | null: false, foreign_key: true|
-| items on display | references  | null: false, foreign_key: true|
+* System dependencies
 
-## Association
+* Configuration
 
+* Database creation
 
-- has_many :product
-- has_many :purchase
-- has_many :shipping
+* Database initialization
 
+* How to run the test suite
 
+* Services (job queues, cache servers, search engines, etc.)
 
-##product_information
+* Deployment instructions
 
-| Column           | Type        |Option                         |
-|------------------|-------------|-------------------------------|
-| name             | references  | null: false, foreign_key: true|
-| price            | references  | null: false, foreign_key: true|
-| image            | references  | null: false, foreign_key: true|
-| question         | references  | null: false, foreign_key: true|
-| explanation      | references  | null: false, foreign_key: true|
-
-## Association
-
-- belongs_record :user
-- has_one :purchase
-
-
-##purchase_record
-
-| Column           | Type        |Option                         |
-|------------------|-------------|-------------------------------|
-| past orders      | references  | null: false, foreign_key: true|
-| seller           | references  | null: false, foreign_key: true|
-
-## Association
-
-- belongs_to :user
-- belongs_to :product
-
-
-##shipping_information
-
-| Column           | Type        |Option                         |
-|------------------|-------------|-------------------------------|
-| address          | references  | null: false, foreign_key: true|
-| name             | references  | null: false, foreign_key: true|
-| phone number     | references  | null: false, foreign_key: true|
-| shipping method  | references  | null: false, foreign_key: true|
-
-## Association
-
-- belongs_to :purchase
-- belongs_to :information
+* ...
