@@ -5,36 +5,37 @@
 
 | Column           | Type        |Options                        |
 |------------------|-------------|-------------------------------|
-| name             | string      |
-| email            | string      |
-| last_name_zen    | string      |
-| first_name_zen   | string      |
-| last_name_kana   | string      |
-| first_name_kana  | string      |
-| date             | integer     |
+| name             | string      | null: false
+| email            | string      | unique: true
+| password         | string      | null: false
+| last_name_zen    | string      | null: false
+| first_name_zen   | string      | null: false
+| last_name_kana   | string      | null: false
+| first_name_kana  | string      | null: false
+| birthday         | date     　　| null: false
 
 ## Association
 
 
 - has_many :products_informations
-- has_many :purchases_record
+- has_many :purchases_records
 
 
 
 
-##products_information
+##products_informations
 
-| Column            | Type        |Options                        |
-|-------------------|-------------|-------------------------------|
-| name              | string      |
-| price             | integer     |
-| explanation       | text        |
-| category          | string      |
-| product_condition | text        | null: false
-| delivery_charge   | integer     | null: false
-| area_of_origin    | string      | null: false
-| days_to_ship      | integer     | null: false
-| users_information | references  | null: false, foreign_key: true|
+| Column               | Type        |Options                        |
+|----------------------|-------------|-------------------------------|
+| name                 | string      | null: false
+| price                | integer     | null: false
+| explanation          | text        | null: false
+| category_id          | integer     | null: false
+| product_condition_id | integer     | null: false
+| delivery_charge_id   | integer     | null: false
+| prefecture_id        | integer     | null: false
+| days_to_ship_id      | integer     | null: false
+| user                 | references  | null: false, foreign_key: true|
  
 ## Association
 
@@ -42,31 +43,29 @@
 - has_one :purchases_record
 
 
-##purchases_record
+##purchases_records
 
 | Column               | Type        |Options                        |
 |----------------------|-------------|-------------------------------|
-| purchases_record     | text        |
-| seller               | string      |
-| users                | references  | null: false, foreign_key: true|
+| user                 | references  | null: false, foreign_key: true|
 | products_information | references  | null: false, foreign_key: true|
 
 ## Association
 
 - belongs_to :user
 - has_one :shipping_information
-
+- belongs_to :products_informations
 
 ##shipping_informations
 
 | Column           | Type        |Options                        |
 |------------------|-------------|-------------------------------|
-| postal_code      | integer     |
-| prefecture       | references  | null: false, foreign_key: true|
-| municipalities   | string      |
-| house_number     | string      |
+| postal_code      | string      | null: false
+| prefecture_id    | integer     | null: false
+| municipalities   | string      | null: false
+| house_number     | string      | null: false
 | building_name    | string      |
-| phone_number     | string      |
+| phone_number     | string      | null: false
 | purchases_record | references  | null: false, foreign_key: true|
 
 ## Association
