@@ -1,38 +1,39 @@
 
 
 
-##user_information
+##users_information
 
 | Column           | Type        |Option                         |
 |------------------|-------------|-------------------------------|
 | name             | references  | null: false, foreign_key: true|
 | text             | references  | null: false, foreign_key: true|
 | image            | references  | null: false, foreign_key: true|
-| items on display | references  | null: false, foreign_key: true|
+| items_on_display | references  | null: false, foreign_key: true|
 
 ## Association
 
 
-- has_many :product
-- has_many :purchase
+- has_many :products
+- has_one :purchases
 - has_many :shipping
 
 
 
-##product_information
+##products_information
 
-| Column           | Type        |Option                         |
-|------------------|-------------|-------------------------------|
-| name             | references  | null: false, foreign_key: true|
-| price            | references  | null: false, foreign_key: true|
-| image            | references  | null: false, foreign_key: true|
-| question         | references  | null: false, foreign_key: true|
-| explanation      | references  | null: false, foreign_key: true|
-
+| Column            | Type        |Option                         |
+|-------------------|-------------|-------------------------------|
+| name              | references  | null: false, foreign_key: true|
+| price             | references  | null: false, foreign_key: true|
+| question          | references  | null: false, foreign_key: true|
+| explanation       | references  | null: false, foreign_key: true|
+| text              | references  | null: false, foreign_key: true|
+| category          | references  | null: false, foreign_key: true|
+| product_condition | references  | null: false, foreign_key: true|
 ## Association
 
 - belongs_record :user
-- has_one :purchase
+- has_one :purchases
 
 
 ##purchase_record
@@ -45,7 +46,7 @@
 ## Association
 
 - belongs_to :user
-- belongs_to :product
+- belongs_to :products
 
 
 ##shipping_information
@@ -54,10 +55,12 @@
 |------------------|-------------|-------------------------------|
 | address          | references  | null: false, foreign_key: true|
 | name             | references  | null: false, foreign_key: true|
-| phone number     | references  | null: false, foreign_key: true|
-| shipping method  | references  | null: false, foreign_key: true|
-
+| phone_number     | references  | null: false, foreign_key: true|
+| shipping_method  | references  | null: false, foreign_key: true|
+| delivery_charge  | references  | null: false, foreign_key: true|
+| area_of_origin   | references  | null: false, foreign_key: true|
+| days_to_ship     | references  | null: false, foreign_key: true|
 ## Association
 
-- belongs_to :purchase
+- belongs_to :purchases
 - belongs_to :information
