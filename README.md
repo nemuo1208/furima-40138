@@ -6,16 +6,19 @@
 | Column           | Type        |Option                         |
 |------------------|-------------|-------------------------------|
 | name             | references  | null: false, foreign_key: true|
-| text             | references  | null: false, foreign_key: true|
-| image            | references  | null: false, foreign_key: true|
-| items_on_display | references  | null: false, foreign_key: true|
+| mail             | references  | null: false, foreign_key: true|
+| last_name_zen    | references  | null: false, foreign_key: true|
+| first_name_zen   | references  | null: false, foreign_key: true|
+| last_name_kana   | references  | null: false, foreign_key: true|
+| first_name_kana  | references  | null: false, foreign_key: true|
+| date_of_birth    | references  | null: false, foreign_key: true|
 
 ## Association
 
 
-- has_many :products
-- has_one :purchases
-- has_many :shipping
+- has_many :products_information
+- has_one :purchases_record
+
 
 
 
@@ -25,42 +28,46 @@
 |-------------------|-------------|-------------------------------|
 | name              | references  | null: false, foreign_key: true|
 | price             | references  | null: false, foreign_key: true|
-| question          | references  | null: false, foreign_key: true|
 | explanation       | references  | null: false, foreign_key: true|
-| text              | references  | null: false, foreign_key: true|
 | category          | references  | null: false, foreign_key: true|
 | product_condition | references  | null: false, foreign_key: true|
+| delivery_charge   | references  | null: false, foreign_key: true|
+| area_of_origin    | references  | null: false, foreign_key: true|
+| days_to_ship      | references  | null: false, foreign_key: true|
+| users_information | references  | null: false, foreign_key: true|
+ 
 ## Association
 
-- belongs_record :user
-- has_one :purchases
+- belongs_to :user_information
+- has_one :purchases_record
 
 
-##purchase_record
+##purchases_record
 
 | Column           | Type        |Option                         |
 |------------------|-------------|-------------------------------|
-| past orders      | references  | null: false, foreign_key: true|
+| purchases_record | references  | null: false, foreign_key: true|
 | seller           | references  | null: false, foreign_key: true|
 
 ## Association
 
-- belongs_to :user
-- belongs_to :products
+- belongs_to :user_information
+- has_one :shipping_information
 
 
 ##shipping_information
 
 | Column           | Type        |Option                         |
 |------------------|-------------|-------------------------------|
-| address          | references  | null: false, foreign_key: true|
-| name             | references  | null: false, foreign_key: true|
+| postal_code      | references  | null: false, foreign_key: true|
+| prefecture       | references  | null: false, foreign_key: true|
+| municipalities   | references  | null: false, foreign_key: true|
+| house_number     | references  | null: false, foreign_key: true|
+| building_name    | references  | null: false, foreign_key: true|
 | phone_number     | references  | null: false, foreign_key: true|
-| shipping_method  | references  | null: false, foreign_key: true|
-| delivery_charge  | references  | null: false, foreign_key: true|
-| area_of_origin   | references  | null: false, foreign_key: true|
-| days_to_ship     | references  | null: false, foreign_key: true|
+| purchases_record | references  | null: false, foreign_key: true|
+
 ## Association
 
-- belongs_to :purchases
-- belongs_to :information
+- belongs_to :purchase_information
+- belongs_to :products_information
