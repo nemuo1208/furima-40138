@@ -5,13 +5,13 @@
 
 | Column           | Type        |Option                         |
 |------------------|-------------|-------------------------------|
-| name             | references  | null: false, foreign_key: true|
-| mail             | references  | null: false, foreign_key: true|
-| last_name_zen    | references  | null: false, foreign_key: true|
-| first_name_zen   | references  | null: false, foreign_key: true|
-| last_name_kana   | references  | null: false, foreign_key: true|
-| first_name_kana  | references  | null: false, foreign_key: true|
-| date_of_birth    | references  | null: false, foreign_key: true|
+| name             | string      | null: false, foreign_key: true|
+| mail             | string      | null: false, foreign_key: true|
+| last_name_zen    | string      | null: false, foreign_key: true|
+| first_name_zen   | string      | null: false, foreign_key: true|
+| last_name_kana   | string      | null: false, foreign_key: true|
+| first_name_kana  | string      | null: false, foreign_key: true|
+| date_of_birth    | integer     | null: false, foreign_key: true|
 
 ## Association
 
@@ -26,14 +26,14 @@
 
 | Column            | Type        |Option                         |
 |-------------------|-------------|-------------------------------|
-| name              | references  | null: false, foreign_key: true|
-| price             | references  | null: false, foreign_key: true|
-| explanation       | references  | null: false, foreign_key: true|
-| category          | references  | null: false, foreign_key: true|
-| product_condition | references  | null: false, foreign_key: true|
-| delivery_charge   | references  | null: false, foreign_key: true|
-| area_of_origin    | references  | null: false, foreign_key: true|
-| days_to_ship      | references  | null: false, foreign_key: true|
+| name              | string      | null: false,                  |
+| price             | integer     | null: false,                  |
+| explanation       | text        | null: false,                  |
+| category          | string      | null: false,                  |
+| product_condition | text        | null: false,                  |
+| delivery_charge   | integer     | null: false,                  |
+| area_of_origin    | string      | null: false,                  |
+| days_to_ship      | integer     | null: false,                  |
 | users_information | references  | null: false, foreign_key: true|
  
 ## Association
@@ -46,8 +46,8 @@
 
 | Column           | Type        |Option                         |
 |------------------|-------------|-------------------------------|
-| purchases_record | references  | null: false, foreign_key: true|
-| seller           | references  | null: false, foreign_key: true|
+| purchases_record | text        | null: false, foreign_key: true|
+| seller           | string      | null: false, foreign_key: true|
 
 ## Association
 
@@ -59,12 +59,12 @@
 
 | Column           | Type        |Option                         |
 |------------------|-------------|-------------------------------|
-| postal_code      | references  | null: false, foreign_key: true|
-| prefecture       | references  | null: false, foreign_key: true|
-| municipalities   | references  | null: false, foreign_key: true|
-| house_number     | references  | null: false, foreign_key: true|
-| building_name    | references  | null: false, foreign_key: true|
-| phone_number     | references  | null: false, foreign_key: true|
+| postal_code      | integer     | null: false, foreign_key: true|
+| prefecture       | string      | null: false, foreign_key: true|
+| municipalities   | string      | null: false, foreign_key: true|
+| house_number     | integer     | null: false, foreign_key: true|
+| building_name    | string      | null: false, foreign_key: true|
+| phone_number     | integer     | null: false, foreign_key: true|
 | purchases_record | references  | null: false, foreign_key: true|
 
 ## Association
