@@ -23,7 +23,7 @@
 
 
 
-##products_informations
+##products_informations(item)
 
 | Column               | Type        |Options                        |
 |----------------------|-------------|-------------------------------|
