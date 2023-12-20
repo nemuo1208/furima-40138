@@ -1,4 +1,4 @@
-# class UsersController < ApplicationController
+class UsersController < ApplicationController
   def show
     @nickname = current_user.nickname
   end
@@ -21,5 +21,4 @@
   def user_params
     params.require(:users).permit(:email, :encrypted_password, :password, :nickname, :last_name_zen, :first_name_zen, :last_name_kana, :first_name_kana, :birthday)
   end
-
 end
