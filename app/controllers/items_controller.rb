@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:new, :create, :edit, :update, :show]
+  before_action :set_item, only: [:new, :create, :edit, :update, :show, :destroy]
   before_action :prevent_url, only: [:edit, :update, :destroy]
 
   def index
@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -34,6 +35,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
+
   private
   def item_params
     params.require(:item).permit(:name, :price, :explanation, :category_id, :product_condition_id, :delivery_charge_id, :area_of_origin_id, :days_to_ship_id, :image, ).merge(user_id: current_user.id)
@@ -47,7 +53,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id]) if params[:id].present?
   end
 
   def prevent_url
