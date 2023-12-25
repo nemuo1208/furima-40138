@@ -33,7 +33,7 @@
 | category_id          | integer     | null: false
 | product_condition_id | integer     | null: false
 | delivery_charge_id   | integer     | null: false
-| prefecture_id        | integer     | null: false
+| area_of_origin        | integer     | null: false
 | days_to_ship_id      | integer     | null: false
 | user                 | references  | null: false, foreign_key: true|
  
@@ -43,7 +43,7 @@
 - has_one :purchases_record
 
 
-##purchases_records
+##purchases_records order
 
 | Column               | Type        |Options                        |
 |----------------------|-------------|-------------------------------|
@@ -56,15 +56,15 @@
 - has_one :shipping_information
 - belongs_to :product_information
 
-##shipping_informations
+##shipping_informations  adress
 
 | Column           | Type        |Options                        |
 |------------------|-------------|-------------------------------|
-| postal_code      | string      | null: false
-| prefecture_id    | integer     | null: false
+| postcode      | string      | null: false
+| area_of_origin    | integer     | null: false
 | municipalities   | string      | null: false
 | house_number     | string      | null: false
-| building_name    | string      |
+| building    | string      |
 | phone_number     | string      | null: false
 | purchases_record | references  | null: false, foreign_key: true|
 
