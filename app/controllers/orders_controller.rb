@@ -1,11 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :non_purchased_item, only: [:index]
-
+  before_action :item_find, only[:index, :create, :non_purchased_item]
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_address = OrderAddress.new
-    @item = Item.find(params[:item_id])
       if current_user == @item.user
         redirect_to root_path
       end
@@ -13,7 +12,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_address_params)
-    @item = Item.find(params[:item_id])
     if @order_address.valid?
       pay_item
       @order_address.save
@@ -40,10 +38,13 @@ class OrdersController < ApplicationController
   end
   
   def non_purchased_item
-    @item = Item.find(params[:item_id])
     @sold_out_items = Order.distinct.pluck(:item_id)
     if current_user.id == @item.user_id || @sold_out_items.include?(@item.id)
       redirect_to root_path
     end
+  end
+
+  def item_find
+    @item = Item.find(params[:item_id])
   end
 end

@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
+    @item = FactoryBot.create(:item)
+    @user = FactoryBot.create(:user)
     @order_address = FactoryBot.build(:order_address)
+    @order_address.user_id = @user.id
+    @order_address.item_id = @item.id
   end
 
   describe '配送先情報の保存' do
@@ -38,7 +42,7 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.building = nil
         expect(@order_address).to be_valid
       end
-      it '電話番号が11番桁以内かつハイフンなしであれば保存できる' do
+      it '電話番号が10から11番桁以内かつハイフンなしであれば保存できる' do
         @order_address.phone_number = 12_345_678_910
         expect(@order_address).to be_valid
       end
@@ -99,6 +103,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = '090333322221111'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+      end
+      it '電話番号が9桁以下あると保存できないこと' do
+        @order_address.phone_number = '0903333'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number is too short (minimum is 9 characters)')
       end
       it 'トークンが空だと保存できないこと' do
         @order_address.token = ''
