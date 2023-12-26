@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :non_purchased_item, only: [:index]
 
   def index
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_address = OrderAddress.new
     @item = Item.find(params[:item_id])
       if current_user == @item.user
@@ -18,7 +19,7 @@ class OrdersController < ApplicationController
       @order_address.save
       return redirect_to root_path
     else
-        gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
   end
@@ -36,5 +37,13 @@ class OrdersController < ApplicationController
       card: order_address_params[:token],
       currency: 'jpy'
     )
+  end
+  
+  def non_purchased_item
+    @item = Item.find(params[:item_id])
+    @sold_out_items = Order.distinct.pluck(:item_id)
+    if current_user.id == @item.user_id || @sold_out_items.include?(@item.id)
+      redirect_to root_path
+    end
   end
 end

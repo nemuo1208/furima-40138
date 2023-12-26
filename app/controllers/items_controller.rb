@@ -2,9 +2,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:new, :create, :edit, :update, :show, :destroy]
   before_action :prevent_url, only: [:edit, :update, :destroy]
+  before_action :non_edit_item, only: [:edit]
 
   def index
-    @items = Item.all
+    @sold_out_items = Order.distinct.pluck(:item_id)
     @items = Item.order("created_at DESC")
   end
 
@@ -22,6 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @sold_out_items = Order.distinct.pluck(:item_id)
   end
 
   def edit
@@ -58,6 +60,14 @@ class ItemsController < ApplicationController
 
   def prevent_url
     if @item.user_id != current_user.id
+      redirect_to root_path
+    end
+  end
+
+  def non_edit_item
+    @item = Item.find(params[:id])
+    @sold_out_items = Order.distinct.pluck(:item_id)
+    if current_user.id == @item.user_id && @sold_out_items.include?(@item.id)
       redirect_to root_path
     end
   end
