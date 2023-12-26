@@ -13,7 +13,8 @@ class User < ApplicationRecord
   validates :birthday, presence: true
 
 
-  # has_many :products_informations
-  # has_many :purchases_records
+  has_many :items
+  has_many :orders
+  
 
 end
