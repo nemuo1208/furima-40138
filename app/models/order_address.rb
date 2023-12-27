@@ -10,7 +10,7 @@ class OrderAddress
     validates :block
     validates :phone_number, format: { without: /\A\d{1,3}-\d{1,4}-\d{4}\z/, message: 'is invalid' }, length: { maximum: 11, minimum: 10 }
     validates :token
-    validates :area_of_origin_id, numericality: { other_than: 0, message: "can't be blank" }
+    validates :area_of_origin_id, numericality: { other_than: 1, message: "can't be blank" }
   end
   def save
     # 寄付情報を保存し、変数donationに代入する
